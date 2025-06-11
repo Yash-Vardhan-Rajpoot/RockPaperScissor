@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CssForRPS.css">
+</head>
+<body>
+    <button id="mode">Dark Mode</button>
+    <h1>Rock Paper Scissor Game</h1>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissor">scissor</button>
+    <button id="reset">Reset</button>
+    <div id="result"></div>
+    <div id="score"></div>
+</body>
+<script>
+    let mode = document.querySelector("#mode");
+    mode.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+    });
+    let arr = ["rock", "paper", "scissor"];
+    let div = document.querySelector("#result");
+    let score= document.querySelector("#score");
+    let userScore = localStorage.getItem("userScore") ? parseInt(localStorage.getItem("userScore")) : 0;
+    let computerScore = localStorage.getItem("computerScore") ? parseInt(localStorage.getItem("computerScore")) : 0;
+    let reset=document.querySelector("#reset");
+    reset.addEventListener("click",function(){
+        userScore=0;
+        computerScore=0;
+        score.innerHTML = `Computer Score: ${computerScore} | User Score: ${userScore}`;
+    })
+
+    document.querySelector("#rock").addEventListener("click", function () {
+        let random = arr[Math.floor(Math.random() * arr.length)];
+        if (random === "rock") div.innerHTML = "Computer chose Rock — It's a tie!";
+        else if (random === "paper"){
+            div.innerHTML = "Computer chose Paper — You lose!";
+            computerScore++;
+            score.innerHTML = `Computer Score: ${computerScore} | User Score: ${userScore}`;
+
+        } 
+        else{
+            div.innerHTML = "Computer chose Scissor — You win!";
+            userScore++;
+            score.innerHTML = `Computer Score: ${computerScore} | User Score: ${userScore}`;
+
+        } 
+    });
+
+    document.querySelector("#paper").addEventListener("click", function () {
+        let random = arr[Math.floor(Math.random() * arr.length)];
+        if (random === "paper") div.innerHTML = "Computer chose Paper — It's a tie!";
+        else if (random === "scissor"){
+            div.innerHTML = "Computer chose Scissor — You lose!";
+            computerScore++;
+            score.innerHTML = `Computer Score: ${computerScore} | User Score: ${userScore}`;
+
+        } 
+        else {
+            div.innerHTML = "Computer chose Rock — You win!";
+            userScore++;
+            score.innerHTML = `Computer Score: ${computerScore} | User Score: ${userScore}`;
+
+        }
+    });
+
+    document.querySelector("#scissor").addEventListener("click", function () {
+        let random = arr[Math.floor(Math.random() * arr.length)];
+        if (random === "scissor") div.innerHTML = "Computer chose Scissor — It's a tie!";
+        else if (random === "rock"){
+            div.innerHTML = "Computer chose Rock — You lose!";
+            computerScore++;
+            score.innerHTML = `Computer Score: ${computerScore} | User Score: ${userScore}`;
+
+        } 
+        else {
+            div.innerHTML = "Computer chose Paper — You win!";
+            userScore++;
+           score.innerHTML = `Computer Score: ${computerScore} | User Score: ${userScore}`;
+
+        }
+    });
+</script>
+
+</html>
